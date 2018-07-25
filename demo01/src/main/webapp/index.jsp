@@ -18,5 +18,6 @@
 <a href="bing.jsp">饼状图</a>
 <a href="line.jsp">折线图</a>
 <a href="user/getAll.action">查询用户信息</a>
+    <p>牛逼啊</P>
 </body>
 </html>
