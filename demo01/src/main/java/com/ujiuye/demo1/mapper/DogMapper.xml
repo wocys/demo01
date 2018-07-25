@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ujiuye.demo1.dao.DogMapper">
+  <resultMap id="BaseResultMap" type="com.ujiuye.demo1.pojo.Dog">
+    <id column="dog_id" jdbcType="INTEGER" property="dog_id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="person_fk" jdbcType="INTEGER" property="person_fk" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dog_id, name, person_fk
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dog
+    where dog_id = #{dog_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dog
+    where dog_id = #{dog_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ujiuye.demo1.pojo.Dog">
+    insert into dog (dog_id, name, person_fk
+      )
+    values (#{dog_id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{person_fk,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ujiuye.demo1.pojo.Dog">
+    insert into dog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dog_id != null">
+        dog_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="person_fk != null">
+        person_fk,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dog_id != null">
+        #{dog_id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="person_fk != null">
+        #{person_fk,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ujiuye.demo1.pojo.Dog">
+    update dog
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="person_fk != null">
+        person_fk = #{person_fk,jdbcType=INTEGER},
+      </if>
+    </set>
+    where dog_id = #{dog_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ujiuye.demo1.pojo.Dog">
+    update dog
+    set name = #{name,jdbcType=VARCHAR},
+      person_fk = #{person_fk,jdbcType=INTEGER}
+    where dog_id = #{dog_id,jdbcType=INTEGER}
+  </update>
+</mapper>
